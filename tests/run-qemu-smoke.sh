@@ -25,7 +25,7 @@ while [ "$i" -lt 200 ]; do
     i=$((i + 1))
 done
 
-printf 'sendkey a\n' | nc -U "$monitor"
+printf 'sendkey a\n' | nc -w 1 -U "$monitor"
 
 i=0
 while [ "$i" -lt 200 ]; do
