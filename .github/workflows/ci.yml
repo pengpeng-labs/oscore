@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes build-essential llvm-18-dev libpolly-18-dev netcat-openbsd qemu-system-x86
+
+      - name: Install Rust 1.88
+        uses: dtolnay/rust-toolchain@1.88.0
+
+      - name: Build pptc 0.4.0
+        run: |
+          git clone --branch v0.4.0 --depth 1 https://github.com/pengpeng-labs/pptc.git "$RUNNER_TEMP/pptc"
+          LLVM_SYS_181_PREFIX=/usr/lib/llvm-18 cargo build --locked --manifest-path "$RUNNER_TEMP/pptc/Cargo.toml"
+
+      - name: Checkout osbare 0.1.0
+        run: git clone --branch v0.1.0 --depth 1 https://github.com/pengpeng-labs/osbare.git "$RUNNER_TEMP/osbare"
+
+      - name: Verify oscore
+        run: |
+          make verify \
+            PPTC="$RUNNER_TEMP/pptc/target/debug/pp" \
+            OSBARE_DIR="$RUNNER_TEMP/osbare" \
+            AS=as CC=gcc LD=ld AR=ar NM=nm OBJCOPY=objcopy READELF=readelf \
+            QEMU=qemu-system-x86_64

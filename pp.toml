@@ -1,0 +1,13 @@
+[package]
+name = "oscore"
+version = "0.1.0"
+language = "0.4.0"
+default-target = "smoke"
+
+[targets.smoke]
+kind = "executable"
+root = "tests/smoke.pp"
+target = "x86_64-unknown-none"
+
+[dependencies]
+osbare = { git = "https://github.com/pengpeng-labs/osbare.git", tag = "v0.1.0" }

@@ -1,0 +1,35 @@
+# oscore ABI v1
+
+[Simplified Chinese](ABI.zh-CN.md)
+
+The normative pplang API is the source imported by `src/oscore.pp`.
+
+## General rules
+
+- APIs are synchronous unless they explicitly manipulate a task wait state.
+- Fixed-capacity exhaustion returns zero, `false`, or a negative integer.
+- Returned physical addresses remain owned by the caller until successfully
+  freed; the page API operates in 4096-byte units.
+- Heap pointers are 16-byte aligned and may be freed only once through the
+  exact address returned by `oscore_heap_alloc`.
+- Handles are opaque `u64` values. Callers must not decode them.
+- Principals and capability masks are values; service calls borrow their
+  principal pointer for the duration of the call only.
+- Task callbacks return zero to remain runnable. A nonzero result stops the
+  task unless the callback placed itself into a wait state.
+- Event and log outputs are copied into caller-owned structures.
+
+## Stable capacities
+
+| Resource | v1 capacity |
+|---|---:|
+| Physical page metadata | 8192 pages |
+| Core heap | 65536 bytes |
+| Heap allocation records | 128 |
+| Log records | 64 |
+| Handles | 64 |
+| Tasks | 16 |
+| Events | 64 |
+| Services | 8 |
+
+These bounds are ABI behavior for v1, not promises for a future ABI version.

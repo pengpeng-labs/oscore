@@ -1,0 +1,8 @@
+version = 1
+
+[[package]]
+name = "osbare"
+version = "0.1.0"
+source = "git+https://github.com/pengpeng-labs/osbare.git?tag=v0.1.0"
+checksum = "301bdbfee7cd181c6c4dc3766893b9ac2fcc66dc07d202efb01e3ad75ab4ea4e"
+commit = "d709afb90dfaa0a7346e3e438ef29dce383aef3d"
