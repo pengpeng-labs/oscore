@@ -10,12 +10,12 @@ ossh / osrt / 系统组件
           |
        oscore
           |
-   osbare v0.1.0
+   osbare v0.1.1
           |
     QEMU x86-64
 ```
 
-v0.1.0 是单地址空间、协作式核心，主要使用 pplang 0.4.0 编写。它不直接包含
+v0.1.1 是单地址空间、协作式核心，主要使用 pplang 0.4.0 编写。它不直接包含
 端口 I/O、MMIO、中断汇编、文件系统、网络协议、Shell、POSIX 层或 WASM 引擎。
 
 ## 已实现能力
@@ -27,13 +27,14 @@ v0.1.0 是单地址空间、协作式核心，主要使用 pplang 0.4.0 编写�
 - 调度最多 16 个轮询任务，支持时钟等待和事件等待；
 - 用显式 principal 与 capability mask 限制服务访问；
 - 提供 console、log、clock、entropy、input、block 和 packet 服务；
+- 提供 capability-gated 单调纳秒时间和明确的时钟分辨率；
 - 由核心持有网卡 DMA 区，上层不接触硬件内存所有权；
 - 不复制 osbare 源码，通过组件合同组合 QEMU 验收镜像。
 
 ## 构建
 
 需要 pplang/pplc/pptc 0.4.0、`x86_64-elf-*` GCC/binutils、QEMU 和 netcat。
-将 osbare v0.1.0 checkout 放在相邻目录，或显式指定路径：
+将 osbare v0.1.1 checkout 放在相邻目录，或显式指定路径：
 
 ```bash
 make verify \

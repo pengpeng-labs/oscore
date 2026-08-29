@@ -24,7 +24,7 @@ fn oscore_init(info: *OsBareBootInfo) -> bool {
     oscore_log_init();
     oscore_handles_init();
     oscore_tasks_init();
-    if (osbare_interrupts_init(100) != 0) {
+    if (osbare_interrupts_init(oscore_clock_frequency_hz() as int) != 0) {
         oscore_platform_write("OSCORE INIT FAIL interrupts\n");
         return false;
     }

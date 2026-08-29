@@ -11,12 +11,12 @@ ossh / osrt / system components
               |
            oscore
               |
-       osbare v0.1.0
+       osbare v0.1.1
               |
         QEMU x86-64
 ```
 
-Version 0.1.0 is a single-address-space, cooperative core. It is written
+Version 0.1.1 is a single-address-space, cooperative core. It is written
 primarily in pplang 0.4.0 and deliberately contains no direct port I/O, MMIO,
 interrupt assembly, filesystem, network protocol, shell, POSIX layer, or WASM
 engine.
@@ -30,13 +30,14 @@ engine.
 - schedules up to 16 polling tasks with timer and event waits;
 - gates services with explicit principals and capability masks;
 - exposes console, log, clock, entropy, input, block, and packet services;
+- publishes capability-gated monotonic nanoseconds and explicit resolution;
 - owns packet-driver DMA storage so upper layers never borrow hardware memory;
 - composes with osbare for QEMU acceptance without copying osbare source.
 
 ## Build
 
 Requirements are pplang/pplc/pptc 0.4.0, the `x86_64-elf-*` binutils and GCC
-tools, QEMU, and netcat. Keep an osbare v0.1.0 checkout next to this repository,
+tools, QEMU, and netcat. Keep an osbare v0.1.1 checkout next to this repository,
 or pass its path explicitly:
 
 ```bash

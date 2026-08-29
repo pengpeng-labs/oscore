@@ -112,10 +112,14 @@ fn oscore_test_tasks() {
 fn oscore_test_services() {
     let root: OsCorePrincipal = oscore_principal_root();
     let restricted: OsCorePrincipal = oscore_principal(2 as u64, oscore_cap_clock());
+    let denied_clock: OsCorePrincipal = oscore_principal(
+        3 as u64, oscore_cap_console_write());
     let info: OsCoreServiceInfo;
     let log_record: OsCoreLogRecord;
     if (!oscore_service_get(oscore_service_clock(), &info) || !info.available
         || info.version != (1 as u64)
+        || oscore_clock_frequency_hz() != (100 as u64)
+        || oscore_clock_resolution_ns() != (10000000 as u64)
         || oscore_console_write(&restricted, "denied")
         || oscore_clock_ticks(&restricted) == (0 as u64)
         || oscore_block_read(&restricted, 8 as u64,
@@ -124,6 +128,13 @@ fn oscore_test_services() {
             ptr_to_int(&oscore_test_entropy[0]), 16) != -2
         || oscore_log_service_read(&restricted, 0 as u64, &log_record) != -2) {
         oscore_test_fail("capability");
+    }
+    if (oscore_clock_monotonic_ns(&denied_clock) != (0 as u64)
+        || oscore_clock_monotonic_ns(&restricted) == (0 as u64)
+        || oscore_clock_monotonic_ns(&root) == (0 as u64)
+        || oscore_clock_monotonic_ns(&root) % oscore_clock_resolution_ns()
+            != (0 as u64)) {
+        oscore_test_fail("clock-contract");
     }
     let index: int = 0;
     while (index < 512) {

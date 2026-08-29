@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Publish clock frequency, resolution, and capability-gated monotonic nanoseconds.
+- Pin osbare v0.1.1 and its deterministic x86-64 floating-point state.
+
 ## 0.1.0
 
 - Establish the osbare v1 platform boundary.

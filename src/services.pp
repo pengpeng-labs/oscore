@@ -67,9 +67,26 @@ fn oscore_console_write(principal: *OsCorePrincipal, value: str) -> bool {
     return true;
 }
 
+fn oscore_clock_frequency_hz() -> u64 { return 100 as u64; }
+
+fn oscore_clock_resolution_ns() -> u64 {
+    return (1000000000 as u64) / oscore_clock_frequency_hz();
+}
+
 fn oscore_clock_ticks(principal: *OsCorePrincipal) -> u64 {
     if (!oscore_capability_allows(principal, oscore_cap_clock())) { return 0 as u64; }
     return oscore_platform_ticks();
+}
+
+fn oscore_clock_monotonic_ns(principal: *OsCorePrincipal) -> u64 {
+    if (!oscore_capability_allows(principal, oscore_cap_clock())) {
+        return 0 as u64;
+    }
+    let ticks: u64 = oscore_platform_ticks();
+    let resolution: u64 = oscore_clock_resolution_ns();
+    let maximum: u64 = (0 as u64) - (1 as u64);
+    if (ticks > maximum / resolution) { return maximum; }
+    return ticks * resolution;
 }
 
 fn oscore_log_service_read(principal: *OsCorePrincipal,

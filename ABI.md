@@ -33,3 +33,11 @@ The normative pplang API is the source imported by `src/oscore.pp`.
 | Services | 8 |
 
 These bounds are ABI behavior for v1, not promises for a future ABI version.
+
+## Clock
+
+The v1 clock runs at 100 Hz and therefore has a 10,000,000 ns resolution.
+`oscore_clock_frequency_hz` and `oscore_clock_resolution_ns` publish those
+properties. `oscore_clock_monotonic_ns` requires the clock capability and
+performs a saturating conversion from platform ticks, so clients never need to
+assume PIT frequency or multiply raw ticks themselves.
