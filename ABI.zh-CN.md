@@ -36,3 +36,9 @@ v1 时钟频率为 100 Hz，分辨率为 10,000,000 ns。
 `oscore_clock_frequency_hz` 和 `oscore_clock_resolution_ns` 公开这些属性；
 `oscore_clock_monotonic_ns` 要求 clock capability，并以饱和乘法转换平台 tick。
 上层无需猜测 PIT 频率，也不应自行换算 raw tick。
+
+## 块服务
+
+`oscore_block_sector_count` 返回 osbare 报告的、以 512 字节为单位的可寻址
+sector 数量。它要求 block-read capability；权限不足返回 `-2`，没有块设备时
+返回 `-1`。read/write 调用的 sector 必须小于该上限。

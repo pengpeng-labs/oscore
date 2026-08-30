@@ -41,3 +41,10 @@ The v1 clock runs at 100 Hz and therefore has a 10,000,000 ns resolution.
 properties. `oscore_clock_monotonic_ns` requires the clock capability and
 performs a saturating conversion from platform ticks, so clients never need to
 assume PIT frequency or multiply raw ticks themselves.
+
+## Block service
+
+`oscore_block_sector_count` returns the number of addressable 512-byte sectors
+reported by osbare. It requires block-read capability, returns `-2` when
+denied, and `-1` when no block device is available. Read and write callers must
+keep every sector below this bound.

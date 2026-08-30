@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Publish capability-gated block-device sector count for storage components.
+
 ## 0.1.1
 
 - Publish clock frequency, resolution, and capability-gated monotonic nanoseconds.

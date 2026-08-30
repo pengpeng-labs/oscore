@@ -1,5 +1,9 @@
 # 变更记录
 
+## 0.1.2
+
+- 为存储组件公开 capability-gated 块设备 sector 数量。
+
 ## 0.1.1
 
 - 公开时钟频率、分辨率和 capability-gated 单调纳秒时间。

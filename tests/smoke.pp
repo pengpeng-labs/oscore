@@ -124,6 +124,7 @@ fn oscore_test_services() {
         || oscore_clock_ticks(&restricted) == (0 as u64)
         || oscore_block_read(&restricted, 8 as u64,
             ptr_to_int(&oscore_test_block_read[0]), 512) != -2
+        || oscore_block_sector_count(&restricted) != -2
         || oscore_entropy_fill(&restricted,
             ptr_to_int(&oscore_test_entropy[0]), 16) != -2
         || oscore_log_service_read(&restricted, 0 as u64, &log_record) != -2) {
@@ -142,7 +143,8 @@ fn oscore_test_services() {
         oscore_test_block_read[index] = 0 as u8;
         index = index + 1;
     }
-    if (oscore_block_write(&root, 8 as u64,
+    if (oscore_block_sector_count(&root) != 2048
+        || oscore_block_write(&root, 8 as u64,
             ptr_to_int(&oscore_test_block_write[0]), 512) != 512
         || oscore_block_flush(&root) != 0
         || oscore_block_read(&root, 8 as u64,

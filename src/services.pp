@@ -12,6 +12,7 @@ static oscore_event_count: int;
 static oscore_event_dropped_value: u64;
 static oscore_packet_dma: [35000]u8;
 static oscore_packet_available: bool;
+static oscore_block_sector_count_value: int;
 
 fn oscore_service_register(kind: u64, required: u64, available: bool) {
     let index: int = oscore_service_count_value;
@@ -30,7 +31,8 @@ fn oscore_services_init() -> bool {
     oscore_event_count = 0;
     oscore_event_dropped_value = 0 as u64;
     oscore_packet_available = false;
-    let block_available: bool = osbare_block_probe() > 0;
+    oscore_block_sector_count_value = osbare_block_probe();
+    let block_available: bool = oscore_block_sector_count_value > 0;
     let requirements: OsBarePacketRequirements = osbare_packet_requirements();
     if (requirements.arena_size <= (35000 as u64)) {
         oscore_packet_available = osbare_packet_init(
@@ -104,6 +106,14 @@ fn oscore_block_read(principal: *OsCorePrincipal,
     sector: u64, destination: u64, capacity: int) -> int {
     if (!oscore_capability_allows(principal, oscore_cap_block_read())) { return -2; }
     return osbare_block_read(sector, destination, capacity);
+}
+
+fn oscore_block_sector_count(principal: *OsCorePrincipal) -> int {
+    if (!oscore_capability_allows(principal, oscore_cap_block_read())) {
+        return -2;
+    }
+    if (oscore_block_sector_count_value <= 0) { return -1; }
+    return oscore_block_sector_count_value;
 }
 
 fn oscore_block_write(principal: *OsCorePrincipal,
