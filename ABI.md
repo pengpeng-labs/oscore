@@ -42,6 +42,11 @@ properties. `oscore_clock_monotonic_ns` requires the clock capability and
 performs a saturating conversion from platform ticks, so clients never need to
 assume PIT frequency or multiply raw ticks themselves.
 
+`oscore_clock_wall_utc` copies a validated UTC-like calendar snapshot into an
+oscore-owned type. It uses the same clock capability, returns `-2` when denied,
+and `-1` for an invalid output or unavailable platform clock. Unix-time and TLS
+calendar conversion remain client policy.
+
 ## Block service
 
 `oscore_block_sector_count` returns the number of addressable 512-byte sectors

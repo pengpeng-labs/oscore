@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Publish a capability-gated UTC calendar snapshot for TLS and other clients.
+
 ## 0.1.2
 
 - Publish capability-gated block-device sector count for storage components.

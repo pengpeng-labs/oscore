@@ -38,6 +38,15 @@ struct OsCoreStatus {
     ticks: u64,
 }
 
+struct OsCoreDateTime {
+    year: u64,
+    month: u64,
+    day: u64,
+    hour: u64,
+    minute: u64,
+    second: u64,
+}
+
 fn oscore_cap_console_read() -> u64 { return 1 as u64; }
 fn oscore_cap_console_write() -> u64 { return 2 as u64; }
 fn oscore_cap_system_inspect() -> u64 { return 4 as u64; }

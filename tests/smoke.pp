@@ -116,12 +116,14 @@ fn oscore_test_services() {
         3 as u64, oscore_cap_console_write());
     let info: OsCoreServiceInfo;
     let log_record: OsCoreLogRecord;
+    let wall: OsCoreDateTime;
     if (!oscore_service_get(oscore_service_clock(), &info) || !info.available
         || info.version != (1 as u64)
         || oscore_clock_frequency_hz() != (100 as u64)
         || oscore_clock_resolution_ns() != (10000000 as u64)
         || oscore_console_write(&restricted, "denied")
         || oscore_clock_ticks(&restricted) == (0 as u64)
+        || oscore_clock_wall_utc(&denied_clock, &wall) != -2
         || oscore_block_read(&restricted, 8 as u64,
             ptr_to_int(&oscore_test_block_read[0]), 512) != -2
         || oscore_block_sector_count(&restricted) != -2
@@ -136,6 +138,14 @@ fn oscore_test_services() {
         || oscore_clock_monotonic_ns(&root) % oscore_clock_resolution_ns()
             != (0 as u64)) {
         oscore_test_fail("clock-contract");
+    }
+    if (oscore_clock_wall_utc(&root, &wall) != 0
+        || wall.year < (2024 as u64) || wall.year > (2099 as u64)
+        || wall.month < (1 as u64) || wall.month > (12 as u64)
+        || wall.day < (1 as u64) || wall.day > (31 as u64)
+        || wall.hour > (23 as u64) || wall.minute > (59 as u64)
+        || wall.second > (60 as u64)) {
+        oscore_test_fail("wall-clock");
     }
     let index: int = 0;
     while (index < 512) {

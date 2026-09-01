@@ -91,6 +91,22 @@ fn oscore_clock_monotonic_ns(principal: *OsCorePrincipal) -> u64 {
     return ticks * resolution;
 }
 
+fn oscore_clock_wall_utc(principal: *OsCorePrincipal,
+    output: *OsCoreDateTime) -> int {
+    if (!oscore_capability_allows(principal, oscore_cap_clock())) { return -2; }
+    if (output == (0 as *OsCoreDateTime)) { return -1; }
+    let platform: OsBareDateTime;
+    let result: int = osbare_rtc_read(&platform);
+    if (result != 0) { return -1; }
+    output.year = platform.year;
+    output.month = platform.month;
+    output.day = platform.day;
+    output.hour = platform.hour;
+    output.minute = platform.minute;
+    output.second = platform.second;
+    return 0;
+}
+
 fn oscore_log_service_read(principal: *OsCorePrincipal,
     sequence: u64, output: *OsCoreLogRecord) -> int {
     if (!oscore_capability_allows(principal, oscore_cap_system_inspect())) { return -2; }

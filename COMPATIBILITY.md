@@ -2,7 +2,7 @@
 
 [Simplified Chinese](COMPATIBILITY.zh-CN.md)
 
-oscore 0.1.2 requires pplang, pplc, and pptc 0.4.0 plus osbare ABI v1 from
+oscore 0.1.3 requires pplang, pplc, and pptc 0.4.0 plus osbare ABI v1 from
 osbare 0.1.1. Its accepted machine environment is the identity-mapped x86-64
 environment established by that osbare release.
 

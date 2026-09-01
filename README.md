@@ -16,7 +16,7 @@ ossh / osrt / system components
         QEMU x86-64
 ```
 
-Version 0.1.2 is a single-address-space, cooperative core. It is written
+Version 0.1.3 is a single-address-space, cooperative core. It is written
 primarily in pplang 0.4.0 and deliberately contains no direct port I/O, MMIO,
 interrupt assembly, filesystem, network protocol, shell, POSIX layer, or WASM
 engine.

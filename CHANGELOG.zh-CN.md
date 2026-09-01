@@ -1,5 +1,9 @@
 # 变更记录
 
+## 0.1.3
+
+- 为 TLS 等 client 公开 capability-gated UTC calendar snapshot。
+
 ## 0.1.2
 
 - 为存储组件公开 capability-gated 块设备 sector 数量。
