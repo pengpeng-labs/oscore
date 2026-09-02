@@ -4,7 +4,7 @@ import "platform.pp";
 static oscore_page_base_value: u64;
 static oscore_page_count_value: u64;
 static oscore_page_free_value: u64;
-static oscore_page_used: [8192]u8;
+static oscore_page_used: [32768]u8;
 
 static oscore_heap_storage: [65536]u8;
 static oscore_heap_free_offset: [128]u64;
@@ -45,13 +45,13 @@ fn oscore_memory_init(info: *OsBareBootInfo) -> bool {
         }
         index = index + 1;
     }
-    if (best_pages > (8192 as u64)) { best_pages = 8192 as u64; }
+    if (best_pages > (32768 as u64)) { best_pages = 32768 as u64; }
     if (best_pages == (0 as u64)) { return false; }
     oscore_page_base_value = best_base;
     oscore_page_count_value = best_pages;
     oscore_page_free_value = best_pages;
     index = 0;
-    while (index < 8192) {
+    while (index < 32768) {
         oscore_page_used[index] = 0 as u8;
         index = index + 1;
     }

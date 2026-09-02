@@ -23,7 +23,7 @@ The normative pplang API is the source imported by `src/oscore.pp`.
 
 | Resource | v1 capacity |
 |---|---:|
-| Physical page metadata | 8192 pages |
+| Physical page metadata | 32768 pages (128 MiB) |
 | Core heap | 65536 bytes |
 | Heap allocation records | 128 |
 | Log records | 64 |

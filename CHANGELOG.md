@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Expand bounded physical-page metadata to 32768 pages (128 MiB).
+- Require osbare 0.1.3 so long-running upper-layer work continues receiving IRQs.
+
 ## 0.1.3
 
 - Publish a capability-gated UTC calendar snapshot for TLS and other clients.

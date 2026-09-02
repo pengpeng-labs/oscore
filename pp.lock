@@ -2,7 +2,7 @@ version = 1
 
 [[package]]
 name = "osbare"
-version = "0.1.1"
-source = "git+https://github.com/pengpeng-labs/osbare.git?tag=v0.1.1"
-checksum = "7bb5c182c9379326e758ccb4519f2d7306f74df5dee3c45e80895300b1df5ec5"
-commit = "67a3d124aa7c9096c474753f6a36bbfeb3c76b25"
+version = "0.1.3"
+source = "git+https://github.com/pengpeng-labs/osbare.git?tag=v0.1.3"
+checksum = "f907e8d4a37f7c5eeec140133dd3cf2a363a1a3d58e429ab37721cda3003e01b"
+commit = "dc88b69aabd8b2e49b03b95b39fcb200509880dc"

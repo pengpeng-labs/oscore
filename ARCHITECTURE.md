@@ -15,7 +15,7 @@ dependency direction. WASM isolation belongs to osrt in a later ppos release.
 
 ## Subsystems
 
-`memory.pp` selects at most 8192 identity-mapped 4 KiB pages from usable Boot
+`memory.pp` selects at most 32768 identity-mapped 4 KiB pages from usable Boot
 ABI regions. The first 16 MiB are excluded and boot-module pages are reserved.
 A separate 64 KiB fixed core heap supports up to 128 live allocation records,
 16-byte alignment, checked free, and adjacent-range coalescing.

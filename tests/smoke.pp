@@ -209,7 +209,7 @@ fn osbare_main(boot_info: *OsBareBootInfo) {
         oscore_test_fail("init");
     }
     let status: OsCoreStatus = oscore_status();
-    if (!status.initialized || status.page_count == (0 as u64)
+    if (!status.initialized || status.page_count != (32768 as u64)
         || status.free_pages != status.page_count
         || status.heap_free != status.heap_capacity
         || status.task_capacity != (16 as u64)

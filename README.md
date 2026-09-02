@@ -11,12 +11,12 @@ ossh / osrt / system components
               |
            oscore
               |
-       osbare v0.1.1
+       osbare v0.1.3
               |
         QEMU x86-64
 ```
 
-Version 0.1.3 is a single-address-space, cooperative core. It is written
+Version 0.1.4 is a single-address-space, cooperative core. It is written
 primarily in pplang 0.4.0 and deliberately contains no direct port I/O, MMIO,
 interrupt assembly, filesystem, network protocol, shell, POSIX layer, or WASM
 engine.
@@ -37,7 +37,7 @@ engine.
 ## Build
 
 Requirements are pplang/pplc/pptc 0.4.0, the `x86_64-elf-*` binutils and GCC
-tools, QEMU, and netcat. Keep an osbare v0.1.1 checkout next to this repository,
+tools, QEMU, and netcat. Keep an osbare v0.1.3 checkout next to this repository,
 or pass its path explicitly:
 
 ```bash

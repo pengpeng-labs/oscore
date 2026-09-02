@@ -9,7 +9,7 @@ monitor=$(mktemp -u)
 trap 'rm -f "$log" "$monitor"' EXIT INT TERM
 
 "${QEMU:-qemu-system-x86_64}" \
-    -machine pc -cpu max -m 128M -display none -serial file:"$log" \
+    -machine pc -cpu max -m 192M -display none -serial file:"$log" \
     -monitor unix:"$monitor",server,nowait \
     -kernel "$kernel" -initrd "$initrd" -append 'oscore.test=1' \
     -drive file="$disk",format=raw,if=ide \

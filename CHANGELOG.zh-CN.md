@@ -1,5 +1,10 @@
 # 变更记录
 
+## 0.1.4
+
+- 将有界物理页元数据扩展到 32768 页（128 MiB）。
+- 要求 osbare 0.1.3，使长时间运行的上层工作持续接收 IRQ。
+
 ## 0.1.3
 
 - 为 TLS 等 client 公开 capability-gated UTC calendar snapshot。
